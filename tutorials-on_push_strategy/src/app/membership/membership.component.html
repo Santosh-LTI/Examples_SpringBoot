@@ -1,0 +1,22 @@
+<section class="pb-5">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Point</th>
+        <th scope="col">Membership</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of members; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ member.firstName }}</td>
+        <td>{{ member.lastName }}</td>
+        <td>{{ member.point }}</td>
+        <td>{{ member.point | calcMemberShipLevel }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
