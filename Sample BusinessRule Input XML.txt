@@ -1,0 +1,236 @@
+URL:
+For Adding: /AddBusinessRules
+For Display All Busines Rule: /getAllBusinessRules
+For Modifying Business Rule: /ModifyBusinessRule/{id}
+For Validating: /BusinessRuleValidate
+For Displaying Particular Business Rules: /getBusinessRules/{constraintNumber}
+
+
+
+
+<inputBusiness>
+
+	
+<transactionID>1</transactionID>
+
+
+	<transactionType>Fund transfer</transactionType>
+
+	<transactionSubType>MY</transactionSubType>
+
+	
+<payloadFormat>XML</payloadFormat>
+
+
+	<payload><![CDATA[
+			<Document>
+				
+<FIToFICstmrCdtTrf>
+					
+<GrpHdr>
+						
+<SttlmInf>
+							
+<SttlmMtd>CLRG</SttlmMtd>
+
+						</SttlmInf>
+					
+</GrpHdr>
+					
+<CdtTrfTxInf>
+						
+<PmtId>
+							
+<EndToEndId>BizMsgId</EndToEndId>
+							<Grt>12</Grt>
+							<Lsr>80</Lsr>
+							<Lte>25</Lte>
+							<Gte>25</Gte>
+						
+</PmtId>
+						
+<Dbtr>
+							
+<Nm></Nm>
+
+						</Dbtr>
+
+						<DbtrAcct>
+							
+<Tp>
+
+								<Prtry>CCRD</Prtry>
+							
+</Tp>
+						
+</DbtrAcct>
+				
+	</CdtTrfTxInf>
+				
+</FIToFICstmrCdtTrf>
+			
+</Document>]]>
+	</payload>
+
+
+	<status>1</status>
+	
+
+<createdOn>21-11-2018</createdOn>
+
+	<updatedOn>22-11-2018</updatedOn>
+
+
+</inputBusiness>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<businessRules>
+
+
+	<ruleCode>11</ruleCode>
+
+
+	<transactionType>Fund transfer</transactionType>
+
+	<transactionSubType>MY</transactionSubType>
+
+	
+	<ruleName>Settlement Method</ruleName>
+
+
+	<applicability>1</applicability>
+
+	
+<operartor>EQUAL</operartor>
+
+
+	<operandOne>/Document/FIToFICstmrCdtTrf/GrpHdr/SttlmInf/SttlmMtd</operandOne>
+
+
+	<operandTwo>LRGD</operandTwo>
+
+	
+<errorMessage>ErrorError Description: Settlement Method is Mandatory and should have following values: CLRG</errorMessage>
+
+</businessRules>
+
+
+<businessRules>
+	<ruleCode>12</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>End to End Id</ruleName>
+	<applicability>1</applicability>
+	<operartor>EQUAL</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/EndToEndId</operandOne>
+	<operandTwo>MsgId</operandTwo>
+	<errorMessage>Error Description: End to End Id is Mandatory and should have following values: Same as BizMsgId</errorMessage>
+</businessRules>
+
+
+<businessRules>
+	<ruleCode>y13</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>Debtor Name</ruleName>
+	<applicability>1</applicability>
+	<operartor>NOTNULL</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/Dbtr/Nm</operandOne>
+	<operandTwo> </operandTwo>
+	<errorMessage>"Error Description: Debtor Name is Mandatory </errorMessage>
+</businessRules>
+
+
+<businessRules>
+	<ruleCode>y14</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>Debtor Account Type</ruleName>
+	<applicability>1</applicability>	
+	<operartor>EQUAL</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/DbtrAcct/Tp/Prtry</operandOne>
+	<operandTwo>CACC,SVGS,CCRD,LOAN</operandTwo>
+	<errorMessage>Error Description: Debtor Account Type is Mandatory and should have following values: 
+CACC: Current account
+SVGS: Saving Account
+DFLT: Either savings or current
+CCRD: Credit Card
+LOAN: Loan
+</errorMessage>
+</businessRules>
+
+ 
+
+<businessRules>
+	<ruleCode>y15</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>End to End Id</ruleName>
+	<applicability>1</applicability>
+	<operartor>GREATER</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/Grt</operandOne>
+	<operandTwo>25</operandTwo>
+	<errorMessage>Error Description: value should be Greater than</errorMessage>
+</businessRules>
+
+
+
+
+<businessRules>
+	<ruleCode>y16</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>GTE</ruleName>
+	<applicability>1</applicability>
+	<operartor>GREATERTHANEQUAL</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/Gte</operandOne>
+	<operandTwo>25</operandTwo>
+	<errorMessage>Error Description: value should be Greater than or equal to </errorMessage>
+</businessRules>
+
+
+
+<businessRules>
+	<ruleCode>y17</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>LTE</ruleName>
+	<applicability>1</applicability>
+	<operartor>LESSTHANEQUAL</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/Lte</operandOne>
+	<operandTwo>25</operandTwo>
+	<errorMessage>Error Description: value should be Less than or equal to </errorMessage>
+</businessRules>
+
+
+
+<businessRules>
+	<ruleCode>y18</ruleCode>
+	<transactionType>Fund transfer</transactionType>
+	<transactionSubType>MY</transactionSubType>
+	<ruleName>LSR</ruleName>
+	<applicability>1</applicability>
+	<operartor>LESSER</operartor>
+	<operandOne>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/Lsr</operandOne>
+	<operandTwo>25</operandTwo>
+	<errorMessage>Error Description: value should be Less than </errorMessage>
+</businessRules>
